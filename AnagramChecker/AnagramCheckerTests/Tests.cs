@@ -23,12 +23,30 @@ namespace AnagramCheckerTests
         [Test]
         public void OneWordReturnsNull()
         {
-            List<string> wordList = new List<string>();
-            wordList.Add("Bobo");
+            List<string> wordList = new List<string>
+            {
+                "Bobo"
+            };
 
             Program program = new Program();
             
             Assert.AreEqual(null,program.AnagramChecker(wordList));
+        }
+
+        [Test]
+        public void BobAndBboAreAnagramsAndReturnsBboAndBob()
+        {
+            List<string> wordList = new List<string>
+            {
+                "bob",
+                "bbo"
+            };
+
+            Program program = new Program();
+
+            var anagramList = program.AnagramChecker(wordList);
+
+            Assert.AreEqual(wordList,anagramList);
         }
     }
 }
