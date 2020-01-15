@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AnagramChecker
 {
@@ -17,11 +21,12 @@ namespace AnagramChecker
                 "cabello",
                 "Longaniza"
             };
-           // var algo = AnagramChecker(wordList);
+            List<string> rawWordList =
+                File.ReadAllLines(@"C:\Users\Angel Ruiz\Desktop\ExamenAnagramas\wordlist.txt").ToList();
             Console.ReadKey();
         }
 
-        public List<string> AnagramChecker(List<string> rawWordList)
+        public static List<string> AnagramChecker(List<string> rawWordList)
         {
             if (rawWordList == null || rawWordList.Count < 2)
             {
@@ -65,7 +70,7 @@ namespace AnagramChecker
         }
 
 
-        public bool AreAnagrams(string firstWord, string secondWord)
+        public static bool AreAnagrams(string firstWord, string secondWord)
         {
             if (firstWord.Length != secondWord.Length)
             {
