@@ -19,5 +19,16 @@ namespace AnagramCheckerTests
 
             Assert.AreEqual(wordList, anagramList);
         }
+
+        [Test]
+        public void OneWordReturnsNull()
+        {
+            List<string> wordList = new List<string>();
+            wordList.Add("Bobo");
+
+            Program program = new Program();
+            
+            Assert.AreEqual(null,program.AnagramChecker(wordList));
+        }
     }
 }
