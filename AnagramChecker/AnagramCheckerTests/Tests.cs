@@ -48,5 +48,30 @@ namespace AnagramCheckerTests
 
             Assert.AreEqual(wordList,anagramList);
         }
+
+        [Test]
+        public void TwoAnagramWordsAndANotAnagramWord()
+        {
+            List<string> wordList = new List<string>()
+            {
+                "bob",
+                "bbo",
+                "camello"
+            };
+
+            Program program = new Program();
+
+            var anagramList = program.AnagramChecker(wordList);
+
+            var actualList = new List<string>()
+            {
+                "bob",
+                "bbo"
+
+            };
+
+            Assert.AreEqual(actualList,anagramList);
+
+        }
     }
 }
