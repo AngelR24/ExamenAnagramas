@@ -8,6 +8,17 @@ namespace AnagramChecker
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            List<string> wordList = new List<string>()
+            {
+                "bob",
+                "bbo",
+                "camello",
+                "obb",
+                "cabello",
+                "Longaniza"
+            };
+           // var algo = AnagramChecker(wordList);
+            Console.ReadKey();
         }
 
         public List<string> AnagramChecker(List<string> rawWordList)
@@ -17,36 +28,38 @@ namespace AnagramChecker
                 return null;
             }
 
-            var wordList = rawWordList;
+            List<string> wordList = new List<string>(rawWordList);
+            List<string> anagramList = new List<string>();
 
-            foreach (var w in wordList)
+            foreach (var w in rawWordList)
             {
                 List<string> actualAnagramsList = new List<string>();
-                foreach (var word in wordList)
+                List<int> indexList = new List<int>();
+                if (anagramList.Contains(w)) continue;
+                for (int i = 0; i < wordList.Count; i++)
                 {
+                    var word = wordList[i];
+                    if(w == word) continue;
                     if (AreAnagrams(w, word))
                     {
-                        actualAnagramsList.Add(w);
                         actualAnagramsList.Add(word);
-                        wordList.Remove(w);
-                        wordList.Remove(word);
+                        indexList.Add(i);
                     }
-
-                    Console.WriteLine(string.Format(string.Join(" ", actualAnagramsList)));
-
                 }
-            }
-            
                
+                if (actualAnagramsList.Count > 0)
+                {
+                    actualAnagramsList.Add(w);
+                    indexList.Add(0);
+                    Console.WriteLine(string.Format(string.Join(" | ", actualAnagramsList)));
+                    anagramList.AddRange(actualAnagramsList);
+                    foreach (var index in indexList)
+                    {
+                        wordList.RemoveAt(index);
+                    }
+                }
                 
-
-            
-
-            List<string> anagramList = new List<string>();
-            
-
-            anagramList.Add(wordList[0].ToString());
-            anagramList.Add(wordList[1].ToString());
+            }
 
             return anagramList;
         }
@@ -59,17 +72,12 @@ namespace AnagramChecker
                 return false;
             }
             var first = firstWord.ToLower().ToCharArray();
-            var second = firstWord.ToLower().ToCharArray();
+            var second = secondWord.ToLower().ToCharArray();
             Array.Sort(first);
             Array.Sort(second);
-            if (first == second)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var f = new string(first);
+            var s = new string(second);
+            return f == s;
 
         }
 

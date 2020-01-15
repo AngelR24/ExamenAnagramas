@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AnagramChecker;
 using NUnit.Framework;
 
@@ -45,8 +46,13 @@ namespace AnagramCheckerTests
             Program program = new Program();
 
             var anagramList = program.AnagramChecker(wordList);
+            List<string> actualList = new List<string>
+            {
+                "bbo",
+                "bob"
+            };
 
-            Assert.AreEqual(wordList,anagramList);
+            Assert.AreEqual(actualList,anagramList);
         }
 
         [Test]
@@ -65,11 +71,37 @@ namespace AnagramCheckerTests
 
             var actualList = new List<string>()
             {
-                "bob",
-                "bbo"
-
+                "bbo",
+                "bob"
             };
 
+            Assert.AreEqual(actualList,anagramList);
+
+        }
+
+        [Test]
+        public void ThreeAnagramsAndThreeNotAnagramsReturnThreeAnagrams()
+        {
+            List<string> wordList = new List<string>()
+            {
+                "bob",
+                "bbo",
+                "camello",
+                "obb",
+                "cabello",
+                "Longaniza"
+            };
+
+            Program program = new Program();
+
+            var anagramList = program.AnagramChecker(wordList);
+
+            var actualList = new List<string>()
+            {
+                "bbo", 
+                "obb",
+                "bob"
+            };
             Assert.AreEqual(actualList,anagramList);
 
         }
