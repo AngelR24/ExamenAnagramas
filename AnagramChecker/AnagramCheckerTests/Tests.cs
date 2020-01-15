@@ -8,6 +8,7 @@ namespace AnagramCheckerTests
     [TestFixture]
     public class Tests
     {
+        [Test]
         public void NullListReturnsNull()
         {
             List<string> wordList = null;
